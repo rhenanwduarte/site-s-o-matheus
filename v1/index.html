@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Auto Peças São Matheus — Peça certa, na hora certa</title>
+<meta name="description" content="Auto Peças São Matheus: estoque completo, atendimento ágil e décadas de tradição na região. Cote suas peças agora mesmo pelo WhatsApp.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="icon" type="image/png" href="public/logo/favicon-2d.png">
+</head>
+<body>
+<!--
+  THESIS: Autoridade editorial-industrial via escala tipográfica e respiros de cor cheia,
+  no lugar de grades genéricas de ícone+texto — a estrutura da loja é provada pelo peso
+  visual, não por selos ou cards.
+  OWN-WORLD: fundo quase-preto (#0A0A0A) + âmbar quente (#F7B500); Big Shoulders Display
+  em títulos gigantes empilhados; IBM Plex Sans no corpo; IBM Plex Mono em eyebrows/números;
+  hairlines de 1px; blocos texto/mídia alternados de ponta a ponta; cantos tipo "mira de
+  câmera" marcando toda mídia reservada.
+  STORY: o visitante lê um título gigante que afirma estoque + agilidade + confiança, vê a
+  prova de estrutura em blocos alternados, sente o peso da marca no respiro âmbar central, e
+  é conduzido — na hero e no fechamento — a um único caminho: cotar peças no WhatsApp.
+  FIRST VIEWPORT: header fixo com hairline (logo + CTA); hero em altura cheia com fundo de
+  mídia reservado e escurecido, eyebrow, título de 3 linhas empilhadas, parágrafo, CTA
+  primário âmbar + link secundário sublinhado.
+  FORM: direção pinada pelo briefing (referência NEXUS Automotive International, arquivo-fonte
+  fornecido) — sem sorteio de conceito; visitante mode = Persuade.
+  FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review,
+  the verdict, and DESIGN.md.
+-->
+
+<a class="skip-link" href="#main">Pular para o conteúdo</a>
+
+<header class="site-header" id="site-header">
+  <div class="header-inner">
+    <a href="#top" class="brand">
+      <img src="public/logo/logo-2d-full.png" alt="Auto Peças São Matheus" class="brand__logo">
+    </a>
+
+    <nav class="primary-nav" id="primary-nav" aria-label="Navegação principal">
+      <ul>
+        <li><a href="#estoque">Estoque</a></li>
+        <li><a href="#agilidade">Atendimento</a></li>
+        <li><a href="#marcas">Marcas</a></li>
+        <li><a href="#tradicao">A loja</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <a href="https://wa.me/5514997648533?text=Ol%C3%A1!%20Encontrei%20a%20Auto%20Pe%C3%A7as%20S%C3%A3o%20Matheus%20pelo%20site%20e%20gostaria%20de%20cotar%20uma%20pe%C3%A7a.%0A%0ASe%20puder%20me%20ajudar%2C%20seguem%20os%20dados%20do%20meu%20carro%20(n%C3%A3o%20%C3%A9%20obrigat%C3%B3rio%20preencher)%3A%0AModelo%3A%20%0AAno%3A%20%0AMotor%3A%20%0APe%C3%A7a%20que%20preciso%3A%20%0A%0AFico%20no%20aguardo!" class="btn btn--primary btn--header" target="_blank" rel="noopener">
+        Cotar peças agora
+      </a>
+      <button class="menu-trigger" id="menu-trigger" aria-expanded="false" aria-controls="mobile-menu" aria-label="Abrir menu">
+        <span class="menu-trigger__line"></span>
+        <span class="menu-trigger__line"></span>
+        <span class="menu-trigger__line"></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobile-menu" data-state="closed">
+  <ul class="mobile-menu__list">
+    <li><a href="#estoque">Estoque</a></li>
+    <li><a href="#agilidade">Atendimento</a></li>
+    <li><a href="#marcas">Marcas</a></li>
+    <li><a href="#tradicao">A loja</a></li>
+    <li><a href="#contato">Contato</a></li>
+  </ul>
+  <a href="https://wa.me/5514997648533?text=Ol%C3%A1!%20Encontrei%20a%20Auto%20Pe%C3%A7as%20S%C3%A3o%20Matheus%20pelo%20site%20e%20gostaria%20de%20cotar%20uma%20pe%C3%A7a.%0A%0ASe%20puder%20me%20ajudar%2C%20seguem%20os%20dados%20do%20meu%20carro%20(n%C3%A3o%20%C3%A9%20obrigat%C3%B3rio%20preencher)%3A%0AModelo%3A%20%0AAno%3A%20%0AMotor%3A%20%0APe%C3%A7a%20que%20preciso%3A%20%0A%0AFico%20no%20aguardo!" class="btn btn--primary btn--mobile" target="_blank" rel="noopener">
+    Cotar peças agora
+  </a>
+</div>
+
+<main id="main">
+
+  <!-- HERO -->
+  <section class="hero" id="top">
+    <div class="hero__media" aria-hidden="true">
+      <canvas id="hero-shader" class="hero__shader"></canvas>
+    </div>
+    <div class="hero__scrim"></div>
+
+    <div class="hero__inner">
+      <p class="eyebrow reveal">Auto Peças São Matheus · desde sempre na região</p>
+
+      <h1 class="huge-title huge-title--hero reveal">
+        <span>Seu carro parou.</span>
+        <span>A gente resolve.</span>
+        <span class="huge-title__accent">Sem enrolação.</span>
+      </h1>
+
+      <p class="hero__lede reveal">
+        Estoque completo, atendimento direto e um time que conhece peça de verdade.
+        A solução mais rápida da região está a uma mensagem de distância.
+      </p>
+
+      <div class="hero__actions reveal">
+        <a href="https://wa.me/5514997648533?text=Ol%C3%A1!%20Encontrei%20a%20Auto%20Pe%C3%A7as%20S%C3%A3o%20Matheus%20pelo%20site%20e%20gostaria%20de%20cotar%20uma%20pe%C3%A7a.%0A%0ASe%20puder%20me%20ajudar%2C%20seguem%20os%20dados%20do%20meu%20carro%20(n%C3%A3o%20%C3%A9%20obrigat%C3%B3rio%20preencher)%3A%0AModelo%3A%20%0AAno%3A%20%0AMotor%3A%20%0APe%C3%A7a%20que%20preciso%3A%20%0A%0AFico%20no%20aguardo!" class="btn btn--primary btn--large js-magnetic" target="_blank" rel="noopener">
+          Cotar peças agora
+        </a>
+        <a href="#tradicao" class="link-underline link-underline--white">Conheça a loja</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CREDIBILIDADE / NÚMEROS -->
+  <section class="stats">
+    <div class="container">
+      <p class="eyebrow eyebrow--center reveal">A estrutura por trás do balcão</p>
+      <p class="stats__statement reveal">
+        São <strong class="num">[38]</strong> anos abastecendo oficinas e motoristas da região,
+        com mais de <strong class="num">[12&nbsp;mil]</strong> itens em catálogo, peças de
+        <strong class="num">[60+]</strong> marcas atendidas e cotação respondida em até
+        <strong class="num">[15&nbsp;minutos]</strong> em horário comercial. Números que só se
+        constroem com tempo — e é isso que colocamos à sua disposição.
+      </p>
+      <p class="stats__note reveal">*Números ilustrativos — serão substituídos pelos dados reais da loja.</p>
+    </div>
+  </section>
+
+  <!-- GRID BLOCK 1 — ESTOQUE -->
+  <section class="grid-block" id="estoque">
+    <div class="grid-block__text">
+      <p class="eyebrow reveal">Catálogo</p>
+      <h2 class="h2 reveal">Estoque completo, organizado pra resolver na hora</h2>
+      <p class="body-text reveal">
+        Motor, freio, suspensão, elétrica, filtros, correias — organizados por linha e por
+        veículo, prontos pra sair do balcão sem complicação. Trabalhamos só com fabricantes
+        homologados, porque qualidade não é detalhe. Não tem na prateleira? Colocamos no
+        pedido — você não fica na mão.
+      </p>
+      <a href="https://wa.me/5514997648533?text=Ol%C3%A1!%20Encontrei%20a%20Auto%20Pe%C3%A7as%20S%C3%A3o%20Matheus%20pelo%20site%20e%20gostaria%20de%20cotar%20uma%20pe%C3%A7a.%0A%0ASe%20puder%20me%20ajudar%2C%20seguem%20os%20dados%20do%20meu%20carro%20(n%C3%A3o%20%C3%A9%20obrigat%C3%B3rio%20preencher)%3A%0AModelo%3A%20%0AAno%3A%20%0AMotor%3A%20%0APe%C3%A7a%20que%20preciso%3A%20%0A%0AFico%20no%20aguardo!" class="link-underline link-underline--accent reveal" target="_blank" rel="noopener">
+        Consultar disponibilidade
+      </a>
+    </div>
+    <div class="grid-block__media tilt-media reveal">
+      <img class="tilt-media__img" src="public/img/estoque/estoque.jpg" alt="Estoque organizado da Auto Peças São Matheus — prateleiras completas com peças separadas por categoria">
+      <div class="tilt-media__glare" aria-hidden="true"></div>
+    </div>
+  </section>
+
+  <!-- GRID BLOCK 2 — AGILIDADE (mídia à esquerda) -->
+  <section class="grid-block grid-block--reverse" id="agilidade">
+    <div class="grid-block__media tilt-media reveal">
+      <img class="tilt-media__img" src="public/img/atendimento/atednimento.png" alt="Atendente da Auto Peças São Matheus conversando com cliente no balcão, com estoque de peças na parede">
+      <div class="tilt-media__glare" aria-hidden="true"></div>
+    </div>
+    <div class="grid-block__text">
+      <p class="eyebrow reveal">Atendimento</p>
+      <h2 class="h2 reveal">Resposta rápida pra quem não pode esperar</h2>
+      <p class="body-text reveal">
+        Carro parado é prejuízo — pro motorista e pra oficina. Por isso a cotação sai rápido,
+        a peça é separada na hora e a entrega é combinada sem rodeio. Direto ao ponto, do
+        jeito que resolver problema tem que ser.
+      </p>
+      <a href="https://wa.me/5514997648533?text=Ol%C3%A1!%20Encontrei%20a%20Auto%20Pe%C3%A7as%20S%C3%A3o%20Matheus%20pelo%20site%20e%20gostaria%20de%20cotar%20uma%20pe%C3%A7a.%0A%0ASe%20puder%20me%20ajudar%2C%20seguem%20os%20dados%20do%20meu%20carro%20(n%C3%A3o%20%C3%A9%20obrigat%C3%B3rio%20preencher)%3A%0AModelo%3A%20%0AAno%3A%20%0AMotor%3A%20%0APe%C3%A7a%20que%20preciso%3A%20%0A%0AFico%20no%20aguardo!" class="link-underline link-underline--accent reveal" target="_blank" rel="noopener">
+        Falar com um atendente
+      </a>
+    </div>
+  </section>
+
+  <!-- GRID BLOCK 3 — MARCAS PARCEIRAS -->
+  <section class="grid-block" id="marcas">
+    <div class="grid-block__text">
+      <p class="eyebrow reveal">Marcas parceiras</p>
+      <h2 class="h2 reveal">Peças originais e das melhores fabricantes</h2>
+      <p class="body-text reveal">
+        Trabalhamos com fornecedores homologados e linhas reconhecidas pelo mercado, sempre
+        com nota fiscal e garantia. Qualidade que protege o carro do seu cliente — e a
+        reputação da sua oficina.
+      </p>
+      <a href="#contato" class="link-underline link-underline--accent reveal">Ver linha completa de marcas</a>
+    </div>
+    <div class="grid-block__logos" aria-hidden="true">
+      <div class="brand-marquee reveal">
+      <div class="brand-marquee__row">
+        <div class="brand-marquee__track">
+          <span class="brand-card"><img src="public/img/marcas/marca1.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca2.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca3.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca5.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca6.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca7.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca8.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca9.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca10.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca11.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca12.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca13.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca14.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca15.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca16.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca1.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca2.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca3.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca5.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca6.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca7.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca8.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca9.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca10.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca11.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca12.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca13.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca14.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca15.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca16.png" alt="Logo de marca parceira" loading="lazy"></span>
+        </div>
+      </div>
+      <div class="brand-marquee__row brand-marquee__row--reverse">
+        <div class="brand-marquee__track">
+          <span class="brand-card"><img src="public/img/marcas/marca17.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca18.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca19.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca20.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca21.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca22.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca23.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca24.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca25.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca26.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca27.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca28.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca29.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca30.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca31.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca17.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca18.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca19.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca20.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca21.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca22.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca23.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca24.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca25.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca26.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca27.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca28.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca29.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca30.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca31.png" alt="Logo de marca parceira" loading="lazy"></span>
+        </div>
+      </div>
+      <div class="brand-marquee__row">
+        <div class="brand-marquee__track">
+          <span class="brand-card"><img src="public/img/marcas/marca32.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca33.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca34.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca35.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca36.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca37.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca38.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca39.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca40.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca41.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca42.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca43.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca44.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca45.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca32.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca33.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca34.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca35.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca36.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca37.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca38.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca39.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca40.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca41.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca42.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca43.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca44.png" alt="Logo de marca parceira" loading="lazy"></span>
+          <span class="brand-card"><img src="public/img/marcas/marca45.png" alt="Logo de marca parceira" loading="lazy"></span>
+        </div>
+      </div>
+      </div>
+      <p class="brand-marquee__note reveal">Marcas parceiras homologadas — mais de 44 fabricantes atendidos.</p>
+    </div>
+    </div>
+  </section>
+
+  <!-- PARCERIA MOURA -->
+  <section class="moura-spotlight" id="moura">
+    <div class="container moura-spotlight__inner">
+
+      <div class="moura-spotlight__media tilt-media reveal">
+        <span class="moura-spotlight__badge">★ Parceiro oficial</span>
+        <img class="tilt-media__img moura-spotlight__img" src="public/moura/BANNER MOURA.png" alt="Bateria automotiva Moura, marca parceira oficial da Auto Peças São Matheus">
+        <div class="tilt-media__glare" aria-hidden="true"></div>
+      </div>
+
+      <div class="moura-spotlight__text">
+        <p class="eyebrow reveal">Parceria oficial · Baterias Moura</p>
+        <h2 class="h2 reveal">A marca que mais brilha no nosso estoque</h2>
+        <p class="body-text reveal">
+          Somos parceiros diretos da Moura, referência nacional em baterias automotivas.
+          Essa parceria significa preço de parceiro repassado pra você — mais barato que a
+          concorrência, com procedência garantida e garantia de fábrica em toda a linha. Não
+          sabe qual bateria o seu carro leva? O site oficial da Moura descobre em segundos.
+        </p>
+        <a href="https://www.moura.com.br/descubra-qual-a-sua-bateria" class="btn btn--primary btn--large reveal js-magnetic" target="_blank" rel="noopener">
+          Descobrir minha bateria Moura
+        </a>
+        <p class="moura-spotlight__note reveal">Você será direcionado ao site oficial da Moura, em uma nova aba.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- GRID BLOCK 4 — TRADIÇÃO (mídia à esquerda) -->
+  <section class="grid-block grid-block--reverse" id="tradicao">
+    <div class="grid-block__media compare-reveal reveal" role="group" aria-label="Comparação: a loja antes e depois">
+      <div class="compare-reveal__side compare-reveal__side--after">
+        <img src="public/img/historia/depois.jpg" alt="Fachada atual da Auto Peças São Matheus, loja reformada com identidade preta e amarela" draggable="false">
+      </div>
+      <div class="compare-reveal__side compare-reveal__side--before">
+        <img src="public/img/historia/antes.jpg" alt="Interior simples da loja no início, prateleiras e balcão improvisados" draggable="false">
+      </div>
+      <span class="compare-reveal__label compare-reveal__label--before">Antes</span>
+      <span class="compare-reveal__label compare-reveal__label--after">Depois</span>
+      <div class="compare-reveal__divider">
+        <button type="button" class="compare-reveal__handle" aria-label="Arraste para comparar antes e depois" role="slider" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" aria-valuetext="50%, antes">
+          <svg width="16" height="13" viewBox="0 0 18 14" fill="none" aria-hidden="true">
+            <path d="M6 1 L1 7 L6 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M12 1 L17 7 L12 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <div class="grid-block__text">
+      <p class="eyebrow reveal">Nossa história</p>
+      <h2 class="h2 reveal">Uma loja que cresceu junto com a região</h2>
+      <p class="body-text reveal">
+        Começamos pequenos, atendendo vizinho por vizinho. Hoje somos referência para
+        motoristas e oficinas que precisam de estrutura de verdade — mas o jeito de
+        atender não mudou: olho no olho, sem enrolação, resolvendo o que precisa ser
+        resolvido.
+      </p>
+      <a href="trajetoria.html" class="link-underline link-underline--accent reveal">Conhecer nossa trajetória</a>
+    </div>
+  </section>
+
+  <!-- INTERLÚDIO — VÍDEO DA OFICINA -->
+  <section class="interlude">
+    <video class="interlude__video" autoplay muted loop playsinline preload="auto" aria-hidden="true">
+      <source src="public/video/video mecanico.mp4" type="video/mp4">
+    </video>
+    <div class="interlude__scrim" aria-hidden="true"></div>
+    <div class="container interlude__inner">
+      <div class="interlude__copy">
+        <p class="eyebrow interlude__eyebrow reveal">Bastidores da oficina</p>
+        <h2 class="huge-title huge-title--interlude-video reveal">
+          <span>Trabalho de</span>
+          <span class="huge-title__accent">confiança.</span>
+        </h2>
+        <p class="interlude__statement reveal">
+          Não vendemos só peça. Garantimos que o problema seja resolvido — com a peça certa,
+          no prazo certo, pela loja em quem a região confia há gerações.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="final-cta" id="cta-final">
+    <div class="container final-cta__inner">
+      <p class="eyebrow eyebrow--center reveal">Pronto pra resolver agora?</p>
+      <h2 class="h2 h2--center reveal">
+        Manda a peça, o modelo ou a dúvida.<br>A gente cota na hora.
+      </h2>
+      <a href="https://wa.me/5514997648533?text=Ol%C3%A1!%20Encontrei%20a%20Auto%20Pe%C3%A7as%20S%C3%A3o%20Matheus%20pelo%20site%20e%20gostaria%20de%20cotar%20uma%20pe%C3%A7a.%0A%0ASe%20puder%20me%20ajudar%2C%20seguem%20os%20dados%20do%20meu%20carro%20(n%C3%A3o%20%C3%A9%20obrigat%C3%B3rio%20preencher)%3A%0AModelo%3A%20%0AAno%3A%20%0AMotor%3A%20%0APe%C3%A7a%20que%20preciso%3A%20%0A%0AFico%20no%20aguardo!" class="btn btn--primary btn--large reveal js-magnetic" target="_blank" rel="noopener">
+        Cotar peças agora
+      </a>
+      <p class="final-cta__note reveal">Atendimento via WhatsApp · resposta rápida em horário comercial</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer reveal-curtain" id="contato">
+ <div class="footer-curtain">
+  <div class="footer-atmosphere" aria-hidden="true">
+    <div class="footer-atmosphere__glow"></div>
+  </div>
+
+  <div class="footer-marquee" aria-hidden="true">
+    <div class="footer-marquee__track">
+      <div class="footer-marquee__group">
+        <span class="footer-marquee__mark">✦</span><span>Estoque completo</span>
+        <span class="footer-marquee__mark">✦</span><span>Atendimento ágil</span>
+        <span class="footer-marquee__mark">✦</span><span>Tradição de décadas</span>
+        <span class="footer-marquee__mark">✦</span><span>Peças originais</span>
+        <span class="footer-marquee__mark">✦</span><span>Cotação na hora</span>
+      </div>
+      <div class="footer-marquee__group">
+        <span class="footer-marquee__mark">✦</span><span>Estoque completo</span>
+        <span class="footer-marquee__mark">✦</span><span>Atendimento ágil</span>
+        <span class="footer-marquee__mark">✦</span><span>Tradição de décadas</span>
+        <span class="footer-marquee__mark">✦</span><span>Peças originais</span>
+        <span class="footer-marquee__mark">✦</span><span>Cotação na hora</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="container footer__grid">
+
+    <div class="footer__col footer__col--brand">
+      <img src="public/logo/logo-2d-full.png" alt="Auto Peças São Matheus" class="brand__logo brand__logo--footer">
+      <p class="footer__tagline">Peça certa, na hora certa.</p>
+      <div class="footer-signal">
+        <span class="footer-signal__dot"></span>
+        <span class="footer-signal__text">Resposta rápida no WhatsApp</span>
+      </div>
+    </div>
+
+    <div class="footer__col">
+      <p class="footer__label">Endereço</p>
+      <p class="footer__value">Rua Floriano Peixoto, 137 — Centro<br>Fartura/SP<br>CEP 18870-054</p>
+    </div>
+
+    <div class="footer__col">
+      <p class="footer__label">Contato</p>
+      <p class="footer__value">
+        <a class="footer__whatsapp" href="https://wa.me/5514997648533?text=Ol%C3%A1!%20Encontrei%20a%20Auto%20Pe%C3%A7as%20S%C3%A3o%20Matheus%20pelo%20site%20e%20gostaria%20de%20cotar%20uma%20pe%C3%A7a.%0A%0ASe%20puder%20me%20ajudar%2C%20seguem%20os%20dados%20do%20meu%20carro%20(n%C3%A3o%20%C3%A9%20obrigat%C3%B3rio%20preencher)%3A%0AModelo%3A%20%0AAno%3A%20%0AMotor%3A%20%0APe%C3%A7a%20que%20preciso%3A%20%0A%0AFico%20no%20aguardo!" target="_blank" rel="noopener">
+          <svg class="footer__whatsapp-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.46 1.32 4.96L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.9-4.45 9.9-9.92 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm5.8 14.09c-.24.68-1.4 1.33-1.93 1.4-.49.07-1.11.1-1.79-.11-.41-.13-.94-.3-1.62-.6-2.85-1.23-4.71-4.1-4.85-4.29-.14-.19-1.16-1.54-1.16-2.94 0-1.4.73-2.09.99-2.37.26-.28.57-.35.76-.35.19 0 .38 0 .55.01.18.01.41-.07.64.49.24.58.81 2 .88 2.14.07.14.12.31.02.5-.09.19-.14.31-.28.48-.14.16-.29.36-.42.49-.14.13-.28.28-.12.55.16.28.71 1.17 1.52 1.9 1.05.94 1.93 1.23 2.21 1.37.28.14.44.12.6-.07.16-.19.68-.79.87-1.06.18-.28.37-.23.62-.14.26.09 1.63.77 1.91.91.28.14.47.21.53.33.07.12.07.68-.17 1.36z"/></svg>
+          <span>+55 14 99764-8533</span>
+        </a>
+      </p>
+    </div>
+
+    <div class="footer__col">
+      <p class="footer__label">Horário</p>
+      <p class="footer__value">Segunda a sexta — [08h às 18h]<br>Sábado — [08h às 13h]</p>
+    </div>
+
+    <div class="footer__col">
+      <p class="footer__label">Redes sociais</p>
+      <ul class="footer__social">
+        <li><a href="https://www.instagram.com/autopecassaomatheus/" class="js-magnetic" target="_blank" rel="noopener">Instagram</a></li>
+        <li><a href="https://www.facebook.com/autopecassaomatheusfartura/?locale=pt_BR" class="js-magnetic" target="_blank" rel="noopener">Facebook</a></li>
+        <li><a href="https://wa.me/5514997648533?text=Ol%C3%A1!%20Encontrei%20a%20Auto%20Pe%C3%A7as%20S%C3%A3o%20Matheus%20pelo%20site%20e%20gostaria%20de%20cotar%20uma%20pe%C3%A7a.%0A%0ASe%20puder%20me%20ajudar%2C%20seguem%20os%20dados%20do%20meu%20carro%20(n%C3%A3o%20%C3%A9%20obrigat%C3%B3rio%20preencher)%3A%0AModelo%3A%20%0AAno%3A%20%0AMotor%3A%20%0APe%C3%A7a%20que%20preciso%3A%20%0A%0AFico%20no%20aguardo!" class="js-magnetic" target="_blank" rel="noopener">WhatsApp</a></li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="container footer__bottom">
+    <p>© <span id="year">2026</span> Auto Peças São Matheus. Todos os direitos reservados.</p>
+    <a href="#top" class="footer__top-link js-magnetic">Voltar ao topo ↑</a>
+  </div>
+ </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

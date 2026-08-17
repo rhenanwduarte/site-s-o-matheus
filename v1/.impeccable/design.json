@@ -1,0 +1,191 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-14T00:00:00Z",
+  "title": "Design System: Auto Peças São Matheus — v1",
+  "extensions": {
+    "colorMeta": {
+      "amber-signal": { "role": "primary", "displayName": "Âmbar de Sinalização", "canonical": "#f7b500", "tonalRamp": ["#2e1e00", "#4d3200", "#734b00", "#996400", "#c08000", "#f7b500", "#ffcc33", "#ffe08a"] },
+      "amber-signal-hover": { "role": "primary-hover", "displayName": "Âmbar Claro (hover)", "canonical": "#ffcc33" },
+      "amber-signal-press": { "role": "primary-press", "displayName": "Âmbar Escuro (active)", "canonical": "#d99a00" },
+      "amber-ink": { "role": "on-primary", "displayName": "Tinta sobre Âmbar", "canonical": "#120d00" },
+      "asphalt-black": { "role": "neutral-bg", "displayName": "Preto Asfalto", "canonical": "#0a0a0a", "tonalRamp": ["#000000", "#0a0a0a", "#141414", "#1c1c1c", "#2a2a2a", "#3d3d3d", "#5c5c5c", "#8a8a8a"] },
+      "asphalt-black-elevated": { "role": "neutral-bg-elevated", "displayName": "Preto Asfalto Elevado", "canonical": "#141414" },
+      "asphalt-black-elevated-2": { "role": "neutral-bg-elevated-2", "displayName": "Preto Asfalto Elevado 2", "canonical": "#1c1c1c" },
+      "paper-white": { "role": "neutral-text", "displayName": "Branco Papel", "canonical": "#f5f5f0" },
+      "pure-white": { "role": "neutral-text-strong", "displayName": "Branco Puro", "canonical": "#ffffff" },
+      "steel-gray": { "role": "neutral-text-secondary", "displayName": "Cinza Aço", "canonical": "#9a9a92" },
+      "steel-gray-dim": { "role": "neutral-text-caption", "displayName": "Cinza Aço Esmaecido", "canonical": "#86867d" },
+      "hairline-border": { "role": "neutral-border", "displayName": "Hairline", "canonical": "rgba(255, 255, 255, 0.12)" }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display (Hero)", "purpose": "Título gigante da hero, 2-3 linhas empilhadas." },
+      "headline": { "displayName": "Headline", "purpose": "Títulos de seção (h2) em blocos texto+mídia e no CTA final." },
+      "body": { "displayName": "Body", "purpose": "Parágrafos de conteúdo, lede da hero." },
+      "label": { "displayName": "Label / Mono", "purpose": "Eyebrows, navegação, links sublinhados, números de estatística, legendas de placeholder." },
+      "quote": { "displayName": "Quote", "purpose": "Citação de destaque isolada — versículo de abertura da página de trajetória." },
+      "watermark": { "displayName": "Watermark", "purpose": "Wordmark gigante sangrando atrás do rodapé — cor sólida esmaecida por mask-image, nunca gradiente de cor no texto." }
+    },
+    "shadows": [
+      { "name": "cta-hover-glow", "value": "0 10px 24px -12px rgba(247, 181, 0, 0.55)", "purpose": "Resposta de hover do botão primário — única sombra decorativa do sistema." },
+      { "name": "header-glass", "value": "backdrop-filter: blur(10px) sobre rgba(10,10,10,0.82)", "purpose": "Legibilidade funcional do header fixo sobre conteúdo em scroll. Seguro de usar com a logo v3 porque ela tem fundo transparente de verdade — não há retângulo de cor fixa pra destoar do glass." }
+    ],
+    "motion": [
+      { "name": "ease-out-expo", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Única curva de easing do sistema — usada no reveal de scroll, hover de botão, barra de navegação e cortina do rodapé." },
+      { "name": "reveal", "value": "opacity 0.85s + translateY(28px→0), stagger nth-child até 0.24s, IntersectionObserver threshold 0.15", "purpose": "Único momento de motion autoral da página, reaproveitado em todos os blocos de conteúdo." },
+      { "name": "footer-curtain", "value": "clip-path: inset(0 0 100% 0) → inset(0 0 0% 0), 1.1s ease-out-expo, disparado pelo mesmo IntersectionObserver do reveal", "purpose": "Entrada em cortina do rodapé — o único fechamento cinematográfico da página. O clip-path vive num wrapper interno, nunca no elemento observado (ver Components > Cinematic Footer)." },
+      { "name": "footer-breathe", "value": "9s ease-in-out infinite alternate, scale(1→1.15) opacity(0.7→1)", "purpose": "Respiração do glow radial âmbar no rodapé." },
+      { "name": "footer-marquee", "value": "translateX(0→-50%), 32s linear infinite", "purpose": "Loop da faixa de diferenciais no rodapé; conteúdo duplicado 1x no DOM para loop contínuo." },
+      { "name": "footer-pulse", "value": "scale(0.4→1.6) opacity(0.9→0), 2.2s ease-out-expo infinite", "purpose": "Anel de pulso do sinal âmbar junto ao texto 'Resposta rápida no WhatsApp' — puramente atmosférico, nunca ligado a um horário real." },
+      { "name": "magnetic-hover", "value": "translate(dx*0.35, dy*0.35) via JS no mousemove, transition 0.6s ease-out-expo no mouseleave", "purpose": "Atração sutil do elemento em direção ao cursor — reservado para CTAs grandes, redes sociais e 'voltar ao topo'. Desativado em prefers-reduced-motion e (hover: none)." },
+      { "name": "hero-shader", "value": "WebGL, plasma de linhas via requestAnimationFrame, escopado a .hero (não à viewport), pausado por IntersectionObserver fora de tela", "purpose": "Fundo animado atrás do huge-title da hero, dando profundidade. Nunca inicia sem WebGL ou com prefers-reduced-motion — cai no gradiente estático de .hero__media." },
+      { "name": "tilt-media", "value": "perspective(1200px) rotateX/rotateY até ±7° + scale(1.035) via custom properties --rx/--ry/--s, seguindo o cursor a 0.05s; volta a 0.6s ease-out-expo no mouseleave; brilho radial (.tilt-media__glare) acompanha via --tilt-x/--tilt-y", "purpose": "Profundidade 3D em fotos reais do negócio (uso: #estoque, #agilidade). Nunca nos placeholders de .media-frame nem no Evolution Timeline, que já tem seu próprio hover. Desativado em prefers-reduced-motion e (hover: none)." },
+      { "name": "compare-reveal-spring", "value": "simulação massa-mola via rAF, stiffness 140 / damping 18, sim.v += ((target-x)*stiffness - v*damping)*dt; sweep automático de entrada 50→96→4→50 em 2.6s (easing cúbico por trecho)", "purpose": "Divisor do comparador antes/depois persegue o cursor com resistência elástica em vez de 1:1. Pausado por IntersectionObserver + visibilitychange; em prefers-reduced-motion vira posicionamento direto sem mola e sem sweep automático." }
+    ],
+    "breakpoints": [
+      { "name": "mobile", "value": "≤640px" },
+      { "name": "grid-stack", "value": "≤860px" },
+      { "name": "nav-collapse", "value": "≤1024px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button (Cotar peças agora)",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "CTA de conversão único da página — hero e fechamento.",
+      "html": "<a href=\"#\" class=\"ds-btn-primary\">Cotar peças agora</a>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; justify-content: center; font-family: 'IBM Plex Sans', sans-serif; font-weight: 600; font-size: 1rem; border-radius: 2px; padding: 1.15rem 2.5rem; background: #f7b500; color: #120d00; transition: background-color 0.2s cubic-bezier(0.16,1,0.3,1), transform 0.2s cubic-bezier(0.16,1,0.3,1), box-shadow 0.2s cubic-bezier(0.16,1,0.3,1); } .ds-btn-primary:hover { background: #ffcc33; transform: translateY(-1px); box-shadow: 0 10px 24px -12px rgba(247,181,0,0.55); } .ds-btn-primary:focus-visible { outline: 2px solid #f7b500; outline-offset: 3px; }"
+    },
+    {
+      "name": "Underlined Link",
+      "kind": "custom",
+      "refersTo": "link-underline",
+      "description": "CTA secundário / link de navegação editorial — texto + borda inferior de 1px, mono uppercase tracked.",
+      "html": "<a href=\"#\" class=\"ds-link-underline\">Consultar disponibilidade</a>",
+      "css": ".ds-link-underline { display: inline-flex; align-items: center; gap: 0.5rem; font-family: 'IBM Plex Mono', monospace; font-size: 0.875rem; letter-spacing: 0.06em; text-transform: uppercase; color: #f7b500; padding-bottom: 0.35rem; border-bottom: 1px solid currentColor; transition: color 0.25s cubic-bezier(0.16,1,0.3,1); } .ds-link-underline:hover { color: #ffcc33; } .ds-link-underline:focus-visible { outline: 2px solid #f7b500; outline-offset: 3px; }"
+    },
+    {
+      "name": "Eyebrow Label",
+      "kind": "custom",
+      "refersTo": "eyebrow",
+      "description": "Rótulo mono uppercase tracked — citação deliberada da linguagem da referência pinada, usado com moderação acima de blocos de conteúdo.",
+      "html": "<p class=\"ds-eyebrow\">Catálogo</p>",
+      "css": ".ds-eyebrow { font-family: 'IBM Plex Mono', monospace; font-size: 0.8125rem; letter-spacing: 0.14em; text-transform: uppercase; color: #f7b500; margin: 0 0 1rem; }"
+    },
+    {
+      "name": "Brand Marquee",
+      "kind": "custom",
+      "refersTo": "brand-marquee",
+      "description": "Substituiu a pílula placeholder 'MARCA': 3 linhas de logos reais de fabricantes parceiros, cada uma um carrossel infinito só-CSS que alterna direção e pausa no hover. Bordas com máscara em gradiente (var(--bg-elevated) → transparente). Ver DESIGN.md > Components > Brand Marquee e The Never-Crop-a-Logo Rule.",
+      "html": "<div class=\"ds-brand-row\"><div class=\"ds-brand-track\"><span class=\"ds-brand-card\"><img src=\"marca1.png\" alt=\"Logo de marca parceira\"></span></div></div>",
+      "css": ".ds-brand-row { position: relative; overflow: hidden; } .ds-brand-track { display: flex; align-items: center; gap: 1rem; width: max-content; animation: brand-marquee-scroll 48s linear infinite; } .ds-brand-row:hover .ds-brand-track { animation-play-state: paused; } @keyframes brand-marquee-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } } .ds-brand-card { flex-shrink: 0; display: flex; align-items: center; justify-content: center; height: clamp(2.75rem, 6vw, 3.75rem); padding: 0.4em 0.7em; background: #ffffff; border-radius: 14px; overflow: hidden; } .ds-brand-card img { height: 100%; width: auto; display: block; }"
+    },
+    {
+      "name": "Media Placeholder (Viewfinder)",
+      "kind": "custom",
+      "refersTo": "media-frame",
+      "description": "Componente-assinatura: marca todo espaço de mídia ainda não recebida com quatro cantos em L na cor de acento sobre um fundo com hairline diagonal sutil, mais legenda mono do que deve entrar ali.",
+      "html": "<div class=\"ds-media-frame\"><span class=\"ds-media-frame__corner ds-media-frame__corner--tl\"></span><span class=\"ds-media-frame__corner ds-media-frame__corner--tr\"></span><span class=\"ds-media-frame__corner ds-media-frame__corner--bl\"></span><span class=\"ds-media-frame__corner ds-media-frame__corner--br\"></span><span class=\"ds-media-frame__label\">Imagem — estoque / prateleiras</span></div>",
+      "css": ".ds-media-frame { position: relative; width: 100%; height: 100%; min-height: 260px; background: repeating-linear-gradient(115deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 1px, transparent 1px, transparent 48px), #141414; } .ds-media-frame__corner { position: absolute; width: 22px; height: 22px; border-color: #f7b500; border-style: solid; opacity: 0.85; } .ds-media-frame__corner--tl { top: 0; left: 0; border-width: 2px 0 0 2px; } .ds-media-frame__corner--tr { top: 0; right: 0; border-width: 2px 2px 0 0; } .ds-media-frame__corner--bl { bottom: 0; left: 0; border-width: 0 0 2px 2px; } .ds-media-frame__corner--br { bottom: 0; right: 0; border-width: 0 2px 2px 0; } .ds-media-frame__label { position: absolute; bottom: 1.25rem; left: 1.25rem; font-family: 'IBM Plex Mono', monospace; font-size: 0.6875rem; letter-spacing: 0.08em; text-transform: uppercase; color: #86867d; }"
+    },
+    {
+      "name": "Navigation",
+      "kind": "nav",
+      "refersTo": "primary-nav",
+      "description": "Navegação de header fixo — mono tracked, barra âmbar sobe da esquerda no hover.",
+      "html": "<nav class=\"ds-nav\"><a href=\"#\" class=\"ds-nav__link\">Estoque</a></nav>",
+      "css": ".ds-nav__link { font-family: 'IBM Plex Mono', monospace; font-size: 0.8125rem; letter-spacing: 0.06em; text-transform: uppercase; color: #9a9a92; position: relative; padding-bottom: 0.3rem; transition: color 0.2s ease; } .ds-nav__link::after { content: ''; position: absolute; left: 0; right: 100%; bottom: 0; height: 1px; background: #f7b500; transition: right 0.3s cubic-bezier(0.16,1,0.3,1); } .ds-nav__link:hover { color: #ffffff; } .ds-nav__link:hover::after { right: 0; }"
+    },
+    {
+      "name": "Brand Mark",
+      "kind": "custom",
+      "refersTo": "brand__logo",
+      "description": "v3: logo 3D em ouro com fundo transparente de verdade e o nome da loja embutido na arte (logo-2d-full.png). Tamanho médio-grande (4.5rem header / 6.5rem rodapé / 3.25rem mobile) — abaixo disso o nome fica ilegível. Fundo transparente elimina qualquer emenda contra o header glass. Ver DESIGN.md > Components > Brand Mark.",
+      "html": "<img src=\"logo-2d-full.png\" alt=\"Auto Peças São Matheus\" class=\"ds-brand-logo\">",
+      "css": ".ds-brand-logo { height: 4.5rem; width: auto; display: block; }"
+    },
+    {
+      "name": "Cinematic Footer",
+      "kind": "custom",
+      "refersTo": "site-footer / footer-curtain",
+      "description": "O fechamento cinematográfico da página: glow âmbar respirando, wordmark gigante da marca sangrando atrás do conteúdo, faixa de diferenciais em loop, sinal de pulso atmosférico e entrada em cortina disparada por scroll. Ver DESIGN.md > Components > Cinematic Footer e as Named Rules The Closing Signature Rule / The Magnetic Touch Rule.",
+      "html": "<footer class=\"ds-cinematic-footer\"><div class=\"ds-footer-curtain\"><div class=\"ds-footer-glow\"></div><div class=\"ds-footer-wordmark\">São Matheus</div></div></footer>",
+      "css": ".ds-cinematic-footer { position: relative; overflow: hidden; } .ds-footer-curtain { clip-path: inset(0 0 100% 0); transition: clip-path 1.1s cubic-bezier(0.16,1,0.3,1); } .ds-cinematic-footer.is-visible .ds-footer-curtain { clip-path: inset(0 0 0% 0); } .ds-footer-glow { position: absolute; top: 50%; left: 50%; width: min(70vw, 900px); height: min(70vw, 900px); transform: translate(-50%,-50%); border-radius: 50%; background: radial-gradient(circle, rgba(247,181,0,0.1) 0%, rgba(247,181,0,0) 68%); filter: blur(10px); animation: footer-breathe 9s ease-in-out infinite alternate; } .ds-footer-wordmark { font-family: 'Big Shoulders Display', sans-serif; font-weight: 800; text-transform: uppercase; font-size: clamp(3.5rem, 16vw, 11rem); color: rgba(255,255,255,0.08); -webkit-text-stroke: 1px rgba(255,255,255,0.22); -webkit-mask-image: linear-gradient(180deg, black 0%, transparent 65%); mask-image: linear-gradient(180deg, black 0%, transparent 65%); }"
+    },
+    {
+      "name": "Hero Shader",
+      "kind": "custom",
+      "refersTo": "hero-shader",
+      "description": "Fundo WebGL animado (plasma de linhas âmbar) atrás do huge-title da hero, escopado à própria seção e pausado fora de tela. Ver DESIGN.md > Components > Hero Shader para as regras de robustez (reduced-motion, sem WebGL, resize, pixel ratio).",
+      "html": "<div class=\"ds-hero-media\"><canvas id=\"hero-shader\" class=\"ds-hero-shader\"></canvas></div>",
+      "css": ".ds-hero-media { position: absolute; inset: 0; z-index: 0; background: linear-gradient(160deg, #16130a 0%, #0a0a0a 55%, #0a0a0a 100%); } .ds-hero-shader { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }"
+    },
+    {
+      "name": "Evolution Timeline",
+      "kind": "custom",
+      "refersTo": "timeline",
+      "description": "Substitui a grade quadrada de fotos por uma linha do tempo: três molduras que crescem em largura (22/31/42%) conectadas por uma linha de base com nós numerados, sem datas. Cada foto é um mockup com passe-partout, rotação alternada sutil e glow âmbar; cresce e se endireita no hover/focus. Ver DESIGN.md > Components > Evolution Timeline para o cuidado de min-height na legenda (evita nós desalinhados quando o texto quebra linha de forma desigual entre itens).",
+      "html": "<div class=\"ds-timeline\"><div class=\"ds-timeline__track\"></div><div class=\"ds-timeline__item\"><figure class=\"ds-timeline__photo\" tabindex=\"0\"><img src=\"evolucao-01.jpg\" alt=\"\"></figure><span class=\"ds-timeline__node\"></span><p class=\"ds-timeline__caption\">01 — Legenda</p></div></div>",
+      "css": ".ds-timeline { position: relative; display: flex; align-items: flex-end; gap: clamp(1.5rem, 4vw, 3rem); } .ds-timeline__track { position: absolute; left: 0; right: 0; bottom: 2.6rem; height: 1px; background: rgba(255,255,255,0.12); } .ds-timeline__photo { position: relative; width: 100%; aspect-ratio: 6/5; padding: 0.5rem; background: #141414; border: 1px solid rgba(255,255,255,0.22); box-shadow: 0 24px 48px -28px rgba(247,181,0,0.22), 0 1px 0 rgba(255,255,255,0.06) inset; transition: transform 0.55s cubic-bezier(0.16,1,0.3,1), box-shadow 0.55s cubic-bezier(0.16,1,0.3,1), rotate 0.55s cubic-bezier(0.16,1,0.3,1); } .ds-timeline__photo img { width: 100%; height: 100%; object-fit: cover; display: block; } .ds-timeline__photo:hover { rotate: 0deg; transform: scale(1.08); box-shadow: 0 32px 64px -24px rgba(247,181,0,0.35), 0 1px 0 rgba(255,255,255,0.1) inset; } .ds-timeline__node { width: 9px; height: 9px; border-radius: 50%; background: #f7b500; box-shadow: 0 0 0 4px #0a0a0a; }"
+    },
+    {
+      "name": "Tilt Media",
+      "kind": "custom",
+      "refersTo": "tilt-media",
+      "description": "Fotos reais do negócio (não placeholders) ganham paralaxe 3D seguindo o cursor, até ±7° de rotação + leve zoom, com um brilho radial sutil acompanhando — nunca glass/blur. Primeiro uso: foto do estoque. Ver DESIGN.md > Components > Tilt Media para o escopo (nunca em placeholders, nunca no Evolution Timeline).",
+      "html": "<div class=\"ds-tilt-media\"><img class=\"ds-tilt-media__img\" src=\"estoque.jpg\" alt=\"Descrição real da foto\"><div class=\"ds-tilt-media__glare\"></div></div>",
+      "css": ".ds-tilt-media { position: relative; perspective: 1200px; overflow: hidden; } .ds-tilt-media__img { --rx: 0deg; --ry: 0deg; --s: 1; display: block; width: 100%; height: 100%; object-fit: cover; transform: perspective(1200px) rotateX(var(--rx)) rotateY(var(--ry)) scale(var(--s)); transition: transform 0.6s cubic-bezier(0.16,1,0.3,1); } .ds-tilt-media__glare { position: absolute; inset: 0; background: radial-gradient(circle at var(--tilt-x, 50%) var(--tilt-y, 50%), rgba(255,255,255,0.16), transparent 55%); opacity: 0; transition: opacity 0.4s cubic-bezier(0.16,1,0.3,1); pointer-events: none; } .ds-tilt-media.is-active .ds-tilt-media__glare { opacity: 1; }"
+    },
+    {
+      "name": "Compare Reveal",
+      "kind": "custom",
+      "refersTo": "compare-reveal",
+      "description": "Comparador antes/depois de arraste com física de mola (stiffness 140, damping 18) e demonstração automática de 2.6s na primeira entrada em tela. Cor de assinatura recalibrada para o âmbar único do sistema (nunca a cor coral do material de referência); alça e chips opacos, nunca glass. Uso: #tradicao. Ver DESIGN.md > Components > Compare Reveal.",
+      "html": "<div class=\"ds-compare\" role=\"group\" aria-label=\"Comparação: antes e depois\"><div class=\"ds-compare__side ds-compare__side--after\"><img src=\"depois.jpg\" alt=\"\"></div><div class=\"ds-compare__side ds-compare__side--before\"><img src=\"antes.jpg\" alt=\"\"></div><span class=\"ds-compare__label\" style=\"left:1.25rem\">Antes</span><span class=\"ds-compare__label\" style=\"right:1.25rem\">Depois</span><div class=\"ds-compare__divider\"><button class=\"ds-compare__handle\" role=\"slider\" aria-valuemin=\"0\" aria-valuemax=\"100\" aria-valuenow=\"50\">⟷</button></div></div>",
+      "css": ".ds-compare { position: relative; overflow: hidden; touch-action: pan-y; cursor: ew-resize; } .ds-compare__side { position: absolute; inset: 0; } .ds-compare__side img { width: 100%; height: 100%; object-fit: cover; } .ds-compare__side--before { clip-path: inset(0 50% 0 0); } .ds-compare__label { position: absolute; top: 1.25rem; font-family: 'IBM Plex Mono', monospace; font-size: 0.6875rem; letter-spacing: 0.1em; text-transform: uppercase; color: #ffffff; background: rgba(10,10,10,0.78); border: 1px solid rgba(255,255,255,0.22); padding: 0.4rem 0.75rem; } .ds-compare__divider { position: absolute; top: 0; bottom: 0; left: 50%; width: 2px; background: #f7b500; } .ds-compare__handle { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 2.75rem; height: 2.75rem; border-radius: 50%; background: #0a0a0a; border: 2px solid #f7b500; color: #f7b500; box-shadow: 0 0 0 6px rgba(247,181,0,0.14), 0 8px 20px -6px rgba(0,0,0,0.6); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "O Catálogo Industrial",
+    "overview": "Esta é a primeira de três versões independentes da landing page da Auto Peças São Matheus, cada uma com um mundo visual próprio. A v1 assume por completo a linguagem editorial-industrial da referência fornecida pelo usuário (NEXUS Automotive International): autoridade construída por escala tipográfica e respiro de cor cheia, nunca por selos, ícones ou grades genéricas de feature card. A sensação-alvo é a de um catálogo técnico de peças que também é uma peça gráfica: preciso, denso quando precisa ser denso, silencioso quando precisa respirar. O sistema recusa deliberadamente qualquer coisa que pareça vitrine de e-commerce genérica ou SaaS: nada de gradientes, glassmorphism decorativo, ícones fofos ou cards uniformes de ícone+título+texto.",
+    "keyCharacteristics": [
+      "Fundo quase-preto dominante, um único acento âmbar, sem paleta secundária.",
+      "Títulos gigantes empilhados (Big Shoulders Display) como argumento visual central.",
+      "Rótulos eyebrow em mono tracked — citação deliberada da referência pinada, não um kicker genérico.",
+      "Blocos de texto+mídia alternados de ponta a ponta, sem cards, sem sombra decorativa.",
+      "Toda mídia ainda não recebida é marcada com o motivo de cantos de mira, nunca uma imagem de banco."
+    ],
+    "rules": [
+      { "name": "The One Accent Rule", "body": "Existe exatamente um acento saturado na página — o âmbar. Nenhum segundo tom é introduzido para variar.", "section": "colors" },
+      { "name": "The Stacked Claim Rule", "body": "Todo huge-title é composto de 2-3 linhas curtas empilhadas, nunca um parágrafo corrido em escala gigante.", "section": "typography" },
+      { "name": "The Pinned Eyebrow Rule", "body": "Rótulos eyebrow são citação deliberada da linguagem da referência pinada pelo usuário — usam-se com moderação, nunca duplicados dentro do mesmo agrupamento de conteúdo.", "section": "typography" },
+      { "name": "The Flat-By-Default Rule", "body": "Nenhum elemento tem sombra em repouso. Sombra só aparece como resposta a hover ou como o glass funcional do header.", "section": "elevation" },
+      { "name": "The Closing Signature Rule", "body": "O resto da página usa um único momento de motion (.reveal); o rodapé é a única exceção deliberada, com uma camada extra (atmosfera + marquee + cortina + hover magnético) reservada ao fechamento da página. Nenhuma outra seção herda essa camada.", "section": "components" },
+      { "name": "The Magnetic Touch Rule", "body": "Hover magnético é reservado para CTAs grandes, redes sociais e 'voltar ao topo' — nunca em texto corrido, nunca mais de um elemento por agrupamento. Desativado em prefers-reduced-motion e em dispositivos sem hover.", "section": "components" },
+      { "name": "The Never-Crop-a-Logo Rule", "body": "Logos de marcas parceiras (ou qualquer ativo de marca de terceiros) nunca são recortados por object-fit: cover ou por um crop de proporção fixa. Sempre contain sobre uma tela branca, com a proporção de saída presa numa faixa razoável (1.4:1–2.3:1) — perder parte de um logo é sempre pior do que uma pequena margem branca extra.", "section": "components" },
+      { "name": "The Transparent-Mark Rule", "body": "Qualquer logo/badge colocado sobre uma superfície cuja cor pode variar (o header glass, um futuro fundo animado) deve ter fundo transparente de verdade — nunca um retângulo de cor sólida 'quase igual' ao fundo. Resolve a emenda na raiz, sem depender de perseguir uma cor de fundo que combine com uma superfície que muda.", "section": "elevation" },
+      { "name": "The Recolored Reference Rule", "body": "Todo componente adaptado de um material de referência externo troca a cor de assinatura do original pelo âmbar único do sistema, e qualquer glass/blur do original vira superfície opaca — nunca uma segunda cor de acento, nunca um segundo uso de backdrop-filter. Aplica-se a qualquer novo componente portado de fora (Tilt Media, Compare Reveal, Cinematic Footer).", "section": "components" }
+    ],
+    "dos": [
+      "Do manter exatamente um acento saturado (âmbar) por toda a página.",
+      "Do empilhar huge-titles em 2-3 linhas curtas.",
+      "Do marcar todo espaço de mídia ainda não recebida com cantos de mira + legenda mono.",
+      "Do alternar a ordem texto/mídia a cada bloco de conteúdo consecutivo.",
+      "Do aplicar o único momento de motion autoral (.reveal / .is-visible) a qualquer novo bloco de conteúdo.",
+      "Do manter a camada extra de motion do rodapé (atmosfera, marquee, cortina, magnético) exclusiva dele — ver The Closing Signature Rule.",
+      "Do pré-processar qualquer logo de marca parceira com fit: contain sobre tela branca, nunca cover — ver The Never-Crop-a-Logo Rule.",
+      "Do usar fundo transparente de verdade em qualquer logo/badge colocado sobre o header glass — ver The Transparent-Mark Rule.",
+      "Do recolorir a cor de assinatura de qualquer componente de referência externo pro âmbar único do sistema, e trocar glass/blur por superfície opaca — ver The Recolored Reference Rule."
+    ],
+    "donts": [
+      "Don't introduzir cards de ícone+título+texto para comunicar diferenciais.",
+      "Don't usar sombra em repouso em qualquer componente.",
+      "Don't aplicar border-radius total (círculo/pílula) fora do brand mark e dos nós da linha do tempo — cards de conteúdo usam no máximo 14px (brand card).",
+      "Don't cortar (object-fit: cover) uma logo de marca parceira ou qualquer ativo de marca de terceiros — sempre contain sobre tela branca, ver The Never-Crop-a-Logo Rule.",
+      "Don't adicionar uma segunda cor de acento saturada.",
+      "Don't apresentar números ou dados reais da loja sem colchete de placeholder até o cliente fornecer os dados verdadeiros.",
+      "Don't colocar clip-path de entrada em cortina no mesmo elemento observado pelo IntersectionObserver — zera o intersectionRatio para sempre.",
+      "Don't ligar o sinal de pulso do rodapé a um horário real de funcionamento enquanto os dados forem placeholder."
+    ]
+  }
+}

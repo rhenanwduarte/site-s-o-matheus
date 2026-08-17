@@ -1,0 +1,146 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "design-system-font-size",
+        "value": "16px",
+        "createdAt": "2026-08-15T14:53:19.771Z",
+        "reason": "Base body font-size (browser default 16px), part of the documented Label Micro-Scale system in DESIGN.md"
+      },
+      {
+        "rule": "design-system-font-size",
+        "value": "2.25rem",
+        "createdAt": "2026-08-15T14:53:47.282Z",
+        "reason": "Interlude Display role min clamp endpoint (DESIGN.md Typography > Hierarchy), a distinct huge-title variant from the hero display"
+      },
+      {
+        "rule": "design-system-font-size",
+        "value": "0.875rem",
+        "createdAt": "2026-08-15T14:53:47.399Z",
+        "reason": "Label Micro-Scale step (link-underline, timeline number) — enumerated in DESIGN.md's Label Micro-Scale Rule"
+      },
+      {
+        "rule": "design-system-font-size",
+        "value": "0.9375rem",
+        "createdAt": "2026-08-15T14:53:47.516Z",
+        "reason": "Label Micro-Scale step (button text, footer value) — enumerated in DESIGN.md's Label Micro-Scale Rule"
+      },
+      {
+        "rule": "design-system-font-size",
+        "value": "1rem",
+        "createdAt": "2026-08-15T14:53:47.616Z",
+        "reason": "Label Micro-Scale step (large button text) — enumerated in DESIGN.md's Label Micro-Scale Rule"
+      },
+      {
+        "rule": "design-system-font-size",
+        "value": "0.75rem",
+        "createdAt": "2026-08-15T14:53:47.732Z",
+        "reason": "Label Micro-Scale step (footer bottom, disclaimers) — enumerated in DESIGN.md's Label Micro-Scale Rule"
+      },
+      {
+        "rule": "design-system-font-size",
+        "value": "3rem",
+        "createdAt": "2026-08-15T14:53:47.850Z",
+        "reason": "Mobile full-screen menu Display role clamp endpoint, matching huge-title character at nav scale"
+      },
+      {
+        "rule": "design-system-color",
+        "value": "#16130a",
+        "createdAt": "2026-08-15T14:53:47.970Z",
+        "reason": "Warm near-black tone in the hero gradient, part of the asphalt-black tonal family (see colorMeta.asphalt-black tonalRamp) — not a new hue"
+      },
+      {
+        "rule": "design-system-font-size",
+        "value": "1.125rem",
+        "createdAt": "2026-08-15T14:53:48.084Z",
+        "reason": "Hero lede body text — a body-adjacent step for longer-form intro copy"
+      },
+      {
+        "rule": "design-system-font-size",
+        "value": "0.6875rem",
+        "createdAt": "2026-08-15T14:53:48.200Z",
+        "reason": "Label Micro-Scale smallest step (media-frame caption, brand-marquee note) — enumerated in DESIGN.md's Label Micro-Scale Rule"
+      },
+      {
+        "rule": "design-system-font-size",
+        "value": "1.375rem",
+        "createdAt": "2026-08-15T14:53:48.317Z",
+        "reason": "Stats statement clamp min endpoint — body-at-display-scale role for the credibility block"
+      },
+      {
+        "rule": "design-system-font-size",
+        "value": "1.25rem",
+        "createdAt": "2026-08-15T14:53:48.433Z",
+        "reason": "Footer brand-name size — a headline-adjacent step for smaller standalone headings"
+      },
+      {
+        "rule": "design-system-font-size",
+        "value": "9px",
+        "createdAt": "2026-08-15T20:39:30.101Z",
+        "reason": "Micro Label Family: eyebrow bullet marker size (DESIGN.md .lbl), part of the sub-13px structural label family"
+      },
+      {
+        "rule": "design-system-font-size",
+        "value": "1.0625rem",
+        "createdAt": "2026-08-15T20:39:30.217Z",
+        "reason": "Body-adjacent step for hero blurb / about paragraphs at larger viewport widths, within Body role range"
+      },
+      {
+        "rule": "design-system-font-size",
+        "value": "12px",
+        "createdAt": "2026-08-15T20:39:30.327Z",
+        "reason": "Micro Label Family: header nav links, srv accordion count/head elements — sub-13px structural label size"
+      },
+      {
+        "rule": "design-system-font-size",
+        "value": "0.8125rem",
+        "createdAt": "2026-08-15T20:39:30.452Z",
+        "reason": "Micro Label Family: header CTA (desktop) and cta-final note text — small utility label scale"
+      },
+      {
+        "rule": "design-system-font-size",
+        "value": "96px",
+        "createdAt": "2026-08-15T20:39:30.560Z",
+        "reason": "Contextual Display Scale Rule: fullscreen menu nav link max clamp endpoint, own display-scale role distinct from Hero"
+      },
+      {
+        "rule": "design-system-font-size",
+        "value": "1.875rem",
+        "createdAt": "2026-08-15T20:39:30.679Z",
+        "reason": "Contextual Display Scale Rule: manifesto statement clamp min endpoint"
+      },
+      {
+        "rule": "design-system-font-size",
+        "value": "10px",
+        "createdAt": "2026-08-15T20:39:30.793Z",
+        "reason": "Micro Label Family: srv chips, about grp labels, foot grp labels — sub-13px structural label size"
+      },
+      {
+        "rule": "design-system-font-size",
+        "value": "2rem",
+        "createdAt": "2026-08-15T20:39:30.910Z",
+        "reason": "Contextual Display Scale Rule: about section h2 clamp min endpoint"
+      },
+      {
+        "rule": "design-system-font-size",
+        "value": "8.6px",
+        "createdAt": "2026-08-15T20:39:31.026Z",
+        "reason": "Micro Label Family: spinning badge SVG text-on-path, smallest structural label step"
+      },
+      {
+        "rule": "design-system-font-size",
+        "value": "4.5rem",
+        "createdAt": "2026-08-15T20:39:31.134Z",
+        "reason": "Contextual Display Scale Rule: roll CTA final clamp max endpoint, sized to fit 'Agendar uma consultoria' without wrapping"
+      },
+      {
+        "rule": "design-system-font-size",
+        "value": "18px",
+        "createdAt": "2026-08-15T20:39:31.245Z",
+        "reason": "toTop back-to-top button glyph size, small utility icon scale"
+      }
+    ]
+  }
+}

@@ -1,0 +1,1331 @@
+/* ==========================================================================
+   Auto Peças São Matheus — v1
+   Direção: editorial-industrial (mundo pinado pela referência NEXUS Automotive)
+   Tokens, tipografia e componentes documentados em DESIGN.md após o build.
+   ========================================================================== */
+
+:root {
+  /* Cor — Restrained com um respiro "Committed" no interlúdio âmbar */
+  --bg: #0a0a0a;
+  --bg-elevated: #141414;
+  --bg-elevated-2: #1c1c1c;
+  --border: rgba(255, 255, 255, 0.12);
+  --border-strong: rgba(255, 255, 255, 0.22);
+
+  --white: #f5f5f0;
+  --white-pure: #ffffff;
+  --gray: #9a9a92;
+  --gray-dim: #86867d; /* mantém >=4.5:1 sobre --bg (AA) para legendas/copyright */
+
+  --accent: #f7b500;
+  --accent-hover: #ffcc33;
+  --accent-press: #d99a00;
+  --accent-ink: #120d00; /* texto sobre âmbar */
+
+  /* Tipografia */
+  --font-display: "Big Shoulders Display", "Arial Narrow", sans-serif;
+  --font-body: "IBM Plex Sans", -apple-system, sans-serif;
+  --font-mono: "IBM Plex Mono", "Courier New", monospace;
+  --type-watermark-size: clamp(3.5rem, 16vw, 11rem); /* wordmark gigante do rodapé */
+
+  /* Ritmo */
+  --section-pad: clamp(4.5rem, 9vw, 9rem);
+  --container-pad: clamp(1.25rem, 4vw, 3rem);
+  --max-width: 1360px;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ---------- Reset ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--white);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; margin: 0; padding: 0; }
+h1, h2, h3, p { margin: 0; }
+button { font-family: inherit; background: none; border: none; cursor: pointer; color: inherit; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+/* ---------- Reveal motion (um único momento autoral, reaproveitado na página inteira) ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.85s var(--ease-out-expo), transform 0.85s var(--ease-out-expo);
+  transition-delay: var(--reveal-delay, 0s);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal:nth-child(1) { --reveal-delay: 0s; }
+.reveal:nth-child(2) { --reveal-delay: 0.08s; }
+.reveal:nth-child(3) { --reveal-delay: 0.16s; }
+.reveal:nth-child(4) { --reveal-delay: 0.24s; }
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--accent);
+  color: var(--accent-ink);
+  padding: 0.75rem 1.25rem;
+  z-index: 200;
+  font-weight: 600;
+}
+.skip-link:focus {
+  left: 1rem;
+  top: 1rem;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding-left: var(--container-pad);
+  padding-right: var(--container-pad);
+}
+
+/* ---------- Typography primitives ---------- */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 1rem;
+}
+.eyebrow--center { text-align: center; }
+
+.huge-title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  line-height: 0.92;
+  margin: 0;
+}
+.huge-title span { display: block; }
+.huge-title__accent { color: var(--accent); }
+
+.huge-title--hero {
+  font-size: clamp(2.75rem, 10vw, 8.25rem);
+  color: var(--white-pure);
+}
+
+.h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  line-height: 1.02;
+  font-size: clamp(2rem, 4.2vw, 3.25rem);
+  color: var(--white-pure);
+}
+.h2--center { text-align: center; margin: 0 auto 2.5rem; max-width: 30ch; }
+
+.body-text {
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  color: var(--gray);
+  max-width: 46ch;
+  margin: 1.5rem 0 2rem;
+}
+
+.link-underline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid currentColor;
+  transition: opacity 0.25s var(--ease-out-expo), border-color 0.25s var(--ease-out-expo);
+}
+.link-underline--white { color: var(--white-pure); }
+.link-underline--white:hover { color: var(--accent); }
+.link-underline--accent { color: var(--accent); }
+.link-underline--accent:hover { color: var(--accent-hover); }
+.link-underline--black { color: var(--accent-ink); }
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  letter-spacing: 0.01em;
+  border-radius: 2px;
+  padding: 0.9rem 1.75rem;
+  transition: background-color 0.2s var(--ease-out-expo), transform 0.2s var(--ease-out-expo), box-shadow 0.2s var(--ease-out-expo);
+  white-space: nowrap;
+}
+.btn--primary {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+.btn--primary:hover {
+  background: var(--accent-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px -12px rgba(247, 181, 0, 0.55);
+}
+.btn--primary:active {
+  background: var(--accent-press);
+  transform: translateY(0);
+}
+.btn--large {
+  padding: 1.15rem 2.5rem;
+  font-size: 1rem;
+}
+.btn--header { display: none; }
+
+/* ==========================================================================
+   Header
+   ========================================================================== */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: rgba(10, 10, 10, 0.82);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+}
+.header-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 1.1rem var(--container-pad);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+/* Logo — lockup único (ícone + nome já embutido na própria imagem, fundo
+   transparente, ver DESIGN.md > Components > Brand Mark). Substitui o par
+   badge circular + texto tipografado: como o nome da loja já é parte da
+   arte, um rótulo de texto separado ficaria redundante. Tamanho médio-grande
+   de propósito — o nome só fica legível acima de ~4rem de altura. */
+.brand__logo {
+  height: 4.5rem;
+  width: auto;
+  display: block;
+  flex-shrink: 0;
+}
+
+.primary-nav ul {
+  display: flex;
+  gap: clamp(1.25rem, 2vw, 2.25rem);
+}
+.primary-nav a {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--gray);
+  position: relative;
+  padding-bottom: 0.3rem;
+  transition: color 0.2s ease;
+}
+.primary-nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 100%;
+  bottom: 0;
+  height: 1px;
+  background: var(--accent);
+  transition: right 0.3s var(--ease-out-expo);
+}
+.primary-nav a:hover {
+  color: var(--white-pure);
+}
+.primary-nav a:hover::after {
+  right: 0;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-shrink: 0;
+}
+
+.menu-trigger {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 2.5rem;
+  height: 2.5rem;
+}
+.menu-trigger__line {
+  display: block;
+  width: 22px;
+  height: 1px;
+  background: var(--white-pure);
+  transition: transform 0.3s var(--ease-out-expo), opacity 0.2s ease;
+}
+.menu-trigger[aria-expanded="true"] .menu-trigger__line:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+}
+.menu-trigger[aria-expanded="true"] .menu-trigger__line:nth-child(2) {
+  opacity: 0;
+}
+.menu-trigger[aria-expanded="true"] .menu-trigger__line:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
+/* Mobile full-screen menu */
+.mobile-menu {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 3rem;
+  padding: 2rem var(--container-pad);
+  transform: translateY(-100%);
+  transition: transform 0.45s var(--ease-out-expo);
+}
+.mobile-menu[data-state="open"] {
+  transform: translateY(0);
+}
+.mobile-menu__list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.mobile-menu__list a {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 8vw, 3rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--white-pure);
+  letter-spacing: -0.01em;
+}
+.mobile-menu__list a:hover { color: var(--accent); }
+.btn--mobile { align-self: flex-start; }
+
+/* ==========================================================================
+   Hero
+   ========================================================================== */
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  padding-top: 7.5rem;
+}
+.hero__media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    repeating-linear-gradient(
+      115deg,
+      rgba(247, 181, 0, 0.05) 0px,
+      rgba(247, 181, 0, 0.05) 1px,
+      transparent 1px,
+      transparent 64px
+    ),
+    linear-gradient(160deg, #16130a 0%, #0a0a0a 55%, #0a0a0a 100%);
+}
+.hero__shader {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  opacity: 0.55;
+}
+.hero__scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(180deg, rgba(10, 10, 10, 0.35) 0%, rgba(10, 10, 10, 0.55) 55%, rgba(10, 10, 10, 0.92) 100%);
+}
+.hero__inner {
+  position: relative;
+  z-index: 2;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  width: 100%;
+  padding: 0 var(--container-pad) clamp(3rem, 8vw, 6rem);
+}
+.hero__lede {
+  color: var(--white);
+  font-size: 1.125rem;
+  line-height: 1.7;
+  max-width: 52ch;
+  margin: 1.75rem 0 2.5rem;
+}
+.hero__actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.75rem;
+}
+
+/* ---------- Media-frame placeholder motif (viewfinder corners) ---------- */
+.media-frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 260px;
+}
+.media-frame__corner {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border-color: var(--accent);
+  border-style: solid;
+  opacity: 0.85;
+}
+.media-frame__corner--tl { top: 0; left: 0; border-width: 2px 0 0 2px; }
+.media-frame__corner--tr { top: 0; right: 0; border-width: 2px 2px 0 0; }
+.media-frame__corner--bl { bottom: 0; left: 0; border-width: 0 0 2px 2px; }
+.media-frame__corner--br { bottom: 0; right: 0; border-width: 0 2px 2px 0; }
+.media-frame--dark .media-frame__corner { border-color: var(--accent-ink); opacity: 0.55; }
+.media-frame__label {
+  position: absolute;
+  bottom: 1.25rem;
+  left: 1.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gray-dim);
+}
+.media-frame--dark .media-frame__label {
+  color: rgba(18, 13, 0, 0.55);
+}
+
+/* ==========================================================================
+   Página interna — cabeçalho de conteúdo (trajetória e páginas afins)
+   ========================================================================== */
+.page-hero {
+  padding: clamp(8rem, 14vw, 11rem) 0 clamp(3rem, 6vw, 5rem);
+  border-bottom: 1px solid var(--border);
+}
+.back-link {
+  margin-bottom: 2.5rem;
+}
+.verse-quote {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: clamp(1.5rem, 3.4vw, 2.5rem);
+  line-height: 1.45;
+  max-width: 26ch;
+  color: var(--white-pure);
+  margin: 0 0 1.25rem;
+}
+.verse-quote::before { content: "\201C"; }
+.verse-quote::after { content: "\201D"; }
+.verse-cite {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+/* ---------- Linha do tempo da evolução ----------
+   Substitui a antiga grade 1fr-1fr-1fr de fotos chapadas: uma linha de
+   base conecta três "molduras" de foto que crescem da esquerda pra
+   direita (o próprio tamanho conta a história de crescimento — sem
+   nenhuma data, como pedido). Cada moldura é um mockup com margem tipo
+   passe-partout, leve rotação alternada e glow âmbar suave — no hover,
+   ela cresce e se endireita. Ver DESIGN.md > Components > Evolution
+   Timeline. */
+.photo-sequence-section {
+  padding: var(--section-pad) 0;
+  border-bottom: 1px solid var(--border);
+}
+.timeline {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  gap: clamp(1.5rem, 4vw, 3rem);
+  margin-top: clamp(3.5rem, 7vw, 6rem);
+  padding-top: 1px; /* espaço pra rotação não cortar no reveal */
+}
+.timeline__track {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 2.6rem;
+  height: 1px;
+  background: var(--border);
+}
+.timeline__item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 0 1 auto;
+}
+.timeline__item--1 { width: 22%; }
+.timeline__item--2 { width: 31%; }
+.timeline__item--3 { width: 42%; }
+
+.timeline__photo {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 6 / 5;
+  margin: 0;
+  padding: 0.5rem;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-strong);
+  box-shadow: 0 24px 48px -28px rgba(247, 181, 0, 0.22), 0 1px 0 rgba(255, 255, 255, 0.06) inset;
+  transition: transform 0.55s var(--ease-out-expo), box-shadow 0.55s var(--ease-out-expo), rotate 0.55s var(--ease-out-expo);
+  z-index: 1;
+}
+.timeline__item--1 .timeline__photo { rotate: -2.2deg; }
+.timeline__item--2 .timeline__photo { rotate: 1.6deg; }
+.timeline__item--3 .timeline__photo { rotate: -1.2deg; }
+
+.timeline__photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.timeline__photo:hover,
+.timeline__photo:focus-visible {
+  rotate: 0deg;
+  transform: scale(1.08);
+  box-shadow: 0 32px 64px -24px rgba(247, 181, 0, 0.35), 0 1px 0 rgba(255, 255, 255, 0.1) inset;
+  z-index: 5;
+}
+
+.timeline__stem {
+  width: 1px;
+  height: 1.6rem;
+  background: var(--border-strong);
+}
+.timeline__node {
+  width: 9px;
+  height: 9px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 4px var(--bg);
+}
+.timeline__caption {
+  margin-top: 1rem;
+  text-align: center;
+}
+.timeline__number {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+  margin-bottom: 0.35rem;
+}
+.timeline__label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  letter-spacing: 0.04em;
+  color: var(--gray);
+  /* Altura fixa pra 2 linhas: se a legenda de um item quebra e a de outro
+     não, os itens ficam com alturas diferentes e, como align-items:
+     flex-end alinha pela base, os nós saem da linha do tempo em telas
+     mais estreitas. Reservar sempre o mesmo espaço mantém os nós na reta
+     independente de quantas linhas cada legenda ocupa. */
+  min-height: 2.9em;
+}
+
+/* ---------- Prosa da história ---------- */
+.story-body {
+  padding: var(--section-pad) 0;
+  border-bottom: 1px solid var(--border);
+}
+.story-body .container {
+  max-width: 68ch;
+}
+.story-body p {
+  font-size: 1.0625rem;
+  line-height: 1.8;
+  color: var(--white);
+  margin: 0 0 1.75rem;
+}
+.story-body p:last-child { margin-bottom: 0; }
+.story-body p.story-signoff {
+  color: var(--gray);
+  font-style: italic;
+}
+
+/* ==========================================================================
+   Stats / credibilidade
+   ========================================================================== */
+.stats {
+  padding: var(--section-pad) 0;
+  border-bottom: 1px solid var(--border);
+}
+.stats__statement {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: clamp(1.375rem, 2.6vw, 2.15rem);
+  line-height: 1.5;
+  text-align: center;
+  max-width: 56ch;
+  margin: 0 auto;
+  color: var(--white);
+}
+.stats__statement .num {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  color: var(--accent);
+  white-space: nowrap;
+}
+.stats__note {
+  text-align: center;
+  margin: 2rem auto 0;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--gray-dim);
+  letter-spacing: 0.03em;
+}
+
+/* ==========================================================================
+   Grid blocks (texto + mídia alternados)
+   ========================================================================== */
+.grid-block {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: clamp(480px, 55vw, 640px);
+  border-bottom: 1px solid var(--border);
+}
+.grid-block--reverse {
+  direction: rtl;
+}
+.grid-block--reverse > * {
+  direction: ltr;
+}
+
+.grid-block__text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(3rem, 6vw, 5.5rem) clamp(1.5rem, 5vw, 5rem);
+}
+
+.grid-block__media {
+  position: relative;
+  background:
+    repeating-linear-gradient(
+      115deg,
+      rgba(255, 255, 255, 0.03) 0px,
+      rgba(255, 255, 255, 0.03) 1px,
+      transparent 1px,
+      transparent 48px
+    ),
+    var(--bg-elevated);
+  min-height: 320px;
+}
+.grid-block__media .media-frame {
+  position: absolute;
+  inset: 1.5rem;
+}
+
+/* ---------- Tilt de mídia real (paralaxe 3D no cursor) ----------
+   Reservado a fotos reais do negócio (nunca aos placeholders de
+   .media-frame) — ver DESIGN.md > Components > Tilt Media. A imagem se
+   inclina em direção ao cursor com um brilho radial sutil acompanhando;
+   nunca usa glass/blur (esse brilho é um gradiente simples, não vidro). Sai
+   suave no mouseleave pela mesma curva de easing do resto do site. */
+.tilt-media {
+  position: relative;
+  perspective: 1200px;
+  overflow: hidden;
+}
+.tilt-media__img {
+  --rx: 0deg;
+  --ry: 0deg;
+  --s: 1;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: perspective(1200px) rotateX(var(--rx)) rotateY(var(--ry)) scale(var(--s));
+  transition: transform 0.6s var(--ease-out-expo);
+  will-change: transform;
+}
+.tilt-media__glare {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at var(--tilt-x, 50%) var(--tilt-y, 50%), rgba(255, 255, 255, 0.16), transparent 55%);
+  opacity: 0;
+  transition: opacity 0.4s var(--ease-out-expo);
+  pointer-events: none;
+}
+.tilt-media.is-active .tilt-media__glare {
+  opacity: 1;
+}
+
+/* ---------- Compare Reveal (antes/depois) ----------
+   Comparador de arraste com física de mola, ver DESIGN.md > Components >
+   Compare Reveal. Cor de assinatura é o âmbar único do sistema (nunca a
+   cor coral do material de referência); rótulos e alça são opacos —
+   nenhum blur, mesma disciplina do resto do site. */
+.compare-reveal {
+  position: relative;
+  overflow: hidden;
+  touch-action: pan-y;
+  cursor: ew-resize;
+  user-select: none;
+}
+.compare-reveal__side {
+  position: absolute;
+  inset: 0;
+}
+.compare-reveal__side img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+}
+.compare-reveal__side--before {
+  clip-path: inset(0 50% 0 0);
+  will-change: clip-path;
+}
+.compare-reveal__label {
+  position: absolute;
+  top: 1.25rem;
+  z-index: 3;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--white-pure);
+  background: rgba(10, 10, 10, 0.78);
+  border: 1px solid var(--border-strong);
+  padding: 0.4rem 0.75rem;
+  pointer-events: none;
+  transition: opacity 0.3s var(--ease-out-expo);
+}
+.compare-reveal__label--before { left: 1.25rem; }
+.compare-reveal__label--after { right: 1.25rem; }
+
+.compare-reveal__divider {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  z-index: 4;
+  width: 2px;
+  margin-left: -1px;
+  background: var(--accent);
+  pointer-events: none;
+  will-change: left;
+}
+.compare-reveal__handle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+  border: 2px solid var(--accent);
+  color: var(--accent);
+  pointer-events: auto;
+  cursor: ew-resize;
+  box-shadow: 0 0 0 6px rgba(247, 181, 0, 0.14), 0 8px 20px -6px rgba(0, 0, 0, 0.6);
+  transition: box-shadow 0.2s var(--ease-out-expo);
+}
+.compare-reveal__handle:hover {
+  box-shadow: 0 0 0 8px rgba(247, 181, 0, 0.2), 0 8px 20px -6px rgba(0, 0, 0, 0.6);
+}
+.compare-reveal__handle:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.grid-block__logos {
+  background: var(--bg-elevated);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: clamp(2rem, 5vw, 4rem) 0;
+  overflow: hidden;
+}
+
+/* ---------- Brand marquee: 3 linhas de logos parceiros em carrossel
+   contínuo (ver DESIGN.md > Components > Brand Marquee). Cada logo vira um
+   card retangular (nunca quadrado — proporção natural presa entre 1.4:1 e
+   2.3:1 no pré-processamento, sem cortar nenhum logo) com cantos
+   arredondados moderados. As linhas alternam direção pra dar vida, pausam
+   no hover pra leitura, e o loop é só CSS (mesma técnica do marquee do
+   rodapé) — sem custo de JS. ---------- */
+.brand-marquee {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.75rem, 2vw, 1.25rem);
+}
+.brand-marquee__row {
+  position: relative;
+  overflow: hidden;
+}
+.brand-marquee__row::before,
+.brand-marquee__row::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: clamp(2rem, 6vw, 4.5rem);
+  z-index: 2;
+  pointer-events: none;
+}
+.brand-marquee__row::before {
+  left: 0;
+  background: linear-gradient(90deg, var(--bg-elevated) 0%, transparent 100%);
+}
+.brand-marquee__row::after {
+  right: 0;
+  background: linear-gradient(270deg, var(--bg-elevated) 0%, transparent 100%);
+}
+.brand-marquee__track {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  gap: clamp(0.75rem, 2vw, 1.25rem);
+  animation: brand-marquee-scroll 48s linear infinite;
+}
+.brand-marquee__row--reverse .brand-marquee__track {
+  animation-direction: reverse;
+}
+.brand-marquee__row:hover .brand-marquee__track,
+.brand-marquee__row:focus-within .brand-marquee__track {
+  animation-play-state: paused;
+}
+@keyframes brand-marquee-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.brand-card {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: clamp(2.75rem, 6vw, 3.75rem);
+  padding: 0.4em 0.7em;
+  background: var(--white-pure);
+  border-radius: 14px;
+  overflow: hidden;
+}
+.brand-card img {
+  height: 100%;
+  width: auto;
+  display: block;
+}
+.brand-marquee__note {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--gray-dim);
+  letter-spacing: 0.04em;
+  text-align: center;
+  padding: 0 clamp(2rem, 5vw, 4rem);
+}
+
+/* ---------- Parceria Moura ----------
+   Único ponto do site com card de mídia arredondado + profundidade em
+   3D — quebra deliberada do padrão de cantos retos/câmera do resto do
+   sistema, reservada a este selo de parceria pra funcionar como vitrine de
+   produto (spotlight), não como bloco editorial comum. ---------- */
+.moura-spotlight {
+  position: relative;
+  padding: var(--section-pad) 0;
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+}
+.moura-spotlight::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 22%;
+  width: min(60vw, 900px);
+  aspect-ratio: 1;
+  background: radial-gradient(circle, rgba(247, 181, 0, 0.16), transparent 65%);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 0;
+}
+.moura-spotlight__inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 6fr 5fr;
+  align-items: center;
+  gap: clamp(2.5rem, 6vw, 5rem);
+}
+.moura-spotlight__media {
+  position: relative;
+  border-radius: 28px;
+  box-shadow:
+    0 50px 90px -35px rgba(0, 0, 0, 0.75),
+    0 18px 40px -18px rgba(247, 181, 0, 0.3),
+    0 0 0 1px var(--border-strong);
+  transform: rotate(-2.5deg);
+  transition: transform 0.6s var(--ease-out-expo);
+}
+.moura-spotlight__media:hover {
+  transform: rotate(0deg) scale(1.015);
+}
+.moura-spotlight__img {
+  border-radius: 28px;
+  aspect-ratio: 19 / 10;
+}
+.moura-spotlight__badge {
+  position: absolute;
+  top: 1.25rem;
+  left: 1.25rem;
+  z-index: 2;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent-ink);
+  background: var(--accent);
+  padding: 0.5rem 0.9rem;
+  border-radius: 999px;
+  pointer-events: none;
+}
+.moura-spotlight__note {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--gray-dim);
+  letter-spacing: 0.02em;
+  margin-top: 1rem;
+}
+
+@media (max-width: 860px) {
+  .moura-spotlight__inner {
+    grid-template-columns: 1fr;
+  }
+  .moura-spotlight__media {
+    transform: rotate(-1.5deg);
+    order: -1;
+  }
+}
+
+/* ==========================================================================
+   Interlúdio — vídeo da oficina
+   Vídeo em preto e branco preenchendo a seção de ponta a ponta (mesma
+   lógica de bleed da hero); um scrim em duas direções (diagonal + base)
+   garante contraste pro texto no canto direito independente do quadro do
+   vídeo no momento, e dá a profundidade/vinheta que substitui o antigo
+   respiro âmbar sólido. ---------- */
+.interlude {
+  position: relative;
+  min-height: clamp(480px, 60vw, 760px);
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+.interlude__video {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+.interlude__scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(100deg, transparent 0%, transparent 38%, rgba(10, 10, 10, 0.55) 66%, rgba(10, 10, 10, 0.92) 92%),
+    linear-gradient(180deg,
+      var(--bg) 0%,
+      rgba(10, 10, 10, 0.65) 9%,
+      rgba(10, 10, 10, 0.22) 18%,
+      transparent 28%,
+      transparent 70%,
+      rgba(10, 10, 10, 0.22) 80%,
+      rgba(10, 10, 10, 0.65) 90%,
+      var(--bg) 100%
+    );
+}
+.interlude__inner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  padding-top: clamp(3rem, 8vw, 6rem);
+  padding-bottom: clamp(2.5rem, 6vw, 4.5rem);
+}
+.interlude__copy {
+  margin-left: auto;
+  max-width: 40ch;
+  text-align: right;
+}
+.interlude__eyebrow { color: var(--accent); }
+.huge-title--interlude-video {
+  font-size: clamp(2.5rem, 5.5vw, 4.75rem);
+  color: var(--white-pure);
+  text-align: right;
+  text-shadow: 0 8px 30px rgba(0, 0, 0, 0.55);
+}
+.interlude__statement {
+  margin: 1.5rem 0 0 auto;
+  max-width: 38ch;
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  color: var(--white);
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.6);
+}
+
+@media (max-width: 640px) {
+  .interlude__copy { max-width: 30ch; }
+  .interlude__statement { max-width: 28ch; }
+}
+
+/* ==========================================================================
+   CTA final
+   ========================================================================== */
+.final-cta {
+  padding: var(--section-pad) 0;
+  border-bottom: 1px solid var(--border);
+}
+.final-cta__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.final-cta__note {
+  margin-top: 1.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  color: var(--gray-dim);
+  letter-spacing: 0.04em;
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+.site-footer {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(3.5rem, 7vw, 6rem) 0 2rem;
+}
+
+/* ---------- Cinematic entrance: the footer is the page's one closing
+   signature moment — a curtain-wipe reveal, distinct from the page-wide
+   .reveal fade, triggered by the same IntersectionObserver. See DESIGN.md
+   "The Closing Signature Rule".
+   NOTE: the clip-path lives on an INNER wrapper (.footer-curtain), never on
+   the observed .reveal-curtain element itself — a clip-path on the observed
+   element clips its own box to zero area, which permanently zeroes its
+   IntersectionObserver ratio and the reveal can never fire. ---------- */
+.footer-curtain {
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path 1.1s var(--ease-out-expo);
+}
+.reveal-curtain.is-visible .footer-curtain {
+  clip-path: inset(0 0 0% 0);
+}
+
+/* ---------- Ambient atmosphere: single-accent breathing glow + giant
+   faint brand wordmark bleeding behind the footer content. ---------- */
+.footer-atmosphere {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.footer-atmosphere__glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(70vw, 900px);
+  height: min(70vw, 900px);
+  transform: translate(-50%, -50%) scale(1);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(247, 181, 0, 0.1) 0%, rgba(247, 181, 0, 0) 68%);
+  filter: blur(10px);
+  animation: footer-breathe 9s ease-in-out infinite alternate;
+}
+@keyframes footer-breathe {
+  0% { transform: translate(-50%, -50%) scale(1); opacity: 0.7; }
+  100% { transform: translate(-50%, -50%) scale(1.15); opacity: 1; }
+}
+.footer-atmosphere__wordmark {
+  position: absolute;
+  left: 50%;
+  bottom: -4vw;
+  transform: translateX(-50%);
+  font-family: var(--font-display);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  line-height: 0.8;
+  white-space: nowrap;
+  font-size: var(--type-watermark-size);
+  /* Solid flat fill, faded by an alpha mask — not gradient-filled glyphs.
+     Emphasis/fade here comes from opacity, never from painting a color
+     gradient into the text (see DESIGN.md "The Flat-By-Default Rule" and
+     craft-floor's ban on gradient text). */
+  color: color-mix(in srgb, var(--white) 8%, transparent);
+  -webkit-text-stroke: 1px var(--border-strong);
+  -webkit-mask-image: linear-gradient(180deg, black 0%, transparent 65%);
+  mask-image: linear-gradient(180deg, black 0%, transparent 65%);
+}
+
+/* ---------- Marquee ribbon ---------- */
+.footer-marquee {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border);
+  padding: 0.9rem 0;
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+.footer-marquee__track {
+  display: flex;
+  width: max-content;
+  gap: 3rem;
+  animation: footer-marquee 32s linear infinite;
+}
+.footer-marquee__group {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  flex-shrink: 0;
+}
+.footer-marquee__track span {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gray-dim);
+  white-space: nowrap;
+}
+.footer-marquee__track span.footer-marquee__mark { color: var(--accent); }
+@keyframes footer-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* ---------- Signal pulse (ambient only — not a live open/closed claim) ---------- */
+.footer-signal {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 0.5rem;
+}
+.footer-signal__dot {
+  position: relative;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+}
+.footer-signal__dot::after {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 1px solid var(--accent);
+  animation: footer-pulse 2.2s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+@keyframes footer-pulse {
+  0% { transform: scale(0.4); opacity: 0.9; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+.footer-signal__text {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  color: var(--gray-dim);
+}
+
+/* ---------- Magnetic hover targets ---------- */
+.js-magnetic {
+  display: inline-flex;
+  will-change: transform;
+}
+.footer__grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr 1fr;
+  gap: 2.5rem;
+  padding-bottom: clamp(2.5rem, 5vw, 4rem);
+  border-bottom: 1px solid var(--border);
+}
+.footer__col--brand {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.brand__logo--footer {
+  height: 6.5rem;
+}
+.footer__tagline {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  color: var(--gray);
+}
+.footer__label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 0.9rem;
+}
+.footer__value {
+  font-size: 0.9375rem;
+  line-height: 1.75;
+  color: var(--gray);
+}
+.footer__value a:hover { color: var(--accent); }
+.footer__whatsapp {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.footer__whatsapp-icon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  fill: var(--accent);
+}
+.footer__social li { margin-bottom: 0.6rem; }
+.footer__social a {
+  font-size: 0.9375rem;
+  color: var(--gray);
+}
+.footer__social a:hover { color: var(--accent); }
+
+.footer__bottom {
+  position: relative;
+  z-index: 1;
+  padding-top: 1.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--gray-dim);
+  letter-spacing: 0.03em;
+}
+.footer__top-link:hover { color: var(--accent); }
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .primary-nav { display: none; }
+  .btn--header { display: none; }
+
+  .footer__grid {
+    grid-template-columns: 1fr 1fr;
+    row-gap: 3rem;
+  }
+  .footer__col--brand { grid-column: 1 / -1; }
+}
+
+@media (min-width: 1025px) {
+  .menu-trigger { display: none; }
+  .btn--header { display: inline-flex; }
+}
+
+@media (max-width: 860px) {
+  .grid-block,
+  .grid-block--reverse {
+    grid-template-columns: 1fr;
+    direction: ltr;
+    min-height: 0;
+  }
+  .grid-block__media,
+  .grid-block__logos {
+    min-height: 280px;
+    order: -1;
+  }
+  .grid-block__text {
+    padding: clamp(2.5rem, 8vw, 3.5rem) var(--container-pad);
+  }
+}
+
+@media (max-width: 640px) {
+  .header-inner { padding: 0.75rem var(--container-pad); }
+  .brand__logo { height: 3.25rem; }
+
+  .hero { padding-top: 6rem; }
+  .hero__actions { flex-direction: column; align-items: flex-start; gap: 1.25rem; }
+  .hero__actions .btn { width: 100%; text-align: center; justify-content: center; }
+
+  .footer__grid { grid-template-columns: 1fr; }
+  .footer__bottom { flex-direction: column; align-items: flex-start; }
+
+  .timeline { flex-direction: column; align-items: center; gap: 3rem; }
+  .timeline__track { left: 50%; right: auto; top: 0.5rem; bottom: 0.5rem; width: 1px; height: auto; }
+  .timeline__item,
+  .timeline__item--1,
+  .timeline__item--2,
+  .timeline__item--3 {
+    width: 100%;
+    max-width: 360px;
+  }
+  .timeline__photo { aspect-ratio: 4 / 3; }
+}
+
+@media (min-width: 641px) and (max-width: 860px) {
+  .timeline { gap: 1.25rem; }
+  .timeline__item--1 { width: 24%; }
+  .timeline__item--2 { width: 33%; }
+  .timeline__item--3 { width: 39%; }
+}
